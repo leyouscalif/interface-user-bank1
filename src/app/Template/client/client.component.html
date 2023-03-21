@@ -1,0 +1,53 @@
+
+<div class=" mt-3 ">
+  <div class="row">
+        <div class="card col-md-8 " *ngIf="Clients">
+          <div class="card-header" style="background-color: rgb(226, 248, 228);">
+            <h5 style="margin-left: 5%; margin-right: 5%; color: black;">Liste des clients</h5>
+          </div>
+          <div class="card-body container">
+            <table class="table ">
+                  <thead>
+                    <tr>
+                      <th scope="col">id</th>
+                      <th scope="col">Nom</th> <th scope="col">Email</th>
+                      <th scope="col">Delet</th> <th scope="col">compte</th>
+
+                    </tr>
+                   </thead>
+                  <tbody>
+                    <tr *ngFor="let clt of Clients" class="table">
+                      <td>{{clt.id}}</td>
+                      <td>{{clt.nom}}</td>
+                      <td>{{clt.email}}</td>
+                      <td (click)="deletClient(clt.id)" > <a href="" class="text-danger"> Delete </a></td>
+                      <td>
+                        <li class=" dropdown-item  ">
+                          <span class=" dropdown-toggle  text-success"   role="button" data-bs-toggle="dropdown" aria-expanded="true" > Compte </span>
+                          <ul class="dropdown-menu ">
+                            <li><a class="dropdown-item" routerLink="compteCourant">Compte Courant</a></li>
+                            <li><a class="dropdown-item" routerLink="/compteEpagne">Compte Epagne</a></li>
+                          </ul>
+                        </li>
+                      </td>
+                    </tr>
+                  </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class=" col-md-4">
+          <div class="form-group mt-1 mb-2 container" *ngIf="searchFormClient">
+            <form  [formGroup]="searchFormClient" class="d-flex"  (ngSubmit)="rechercheNom()">
+              <input class="form-control me-2" type="text" formControlName="keyword" placeholder="Search by name" aria-label="Search">
+              <button class="btn btn-outline-success">Search</button>
+            </form>
+          </div>
+
+          <app-form-client (dataChildForms)="responseForms($event)"  ></app-form-client>
+        </div>
+
+     </div>
+</div>
+
+
